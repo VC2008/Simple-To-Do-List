@@ -1,40 +1,27 @@
 // Initialize an array to store tasks
 let tasks = []
+let taskNum = 0
 
-// Add an event listener to add tasks TO the Add Task Button
-document.getElementById('addTaskBtn').addEventListener('click', function () {
-    // Storing text value from input box as a variable 'taskInput'
-    let taskInput = document.getElementById('taskInput').value
-
-    // Checks if there is a Truthy or Falsy Statement
-    if (taskInput) {
-        // Add the task to the tasks array
-        tasks.push(taskInput)
-
-        // Clear the input field after adding the task
-        document.getElementById('taskInput').value = ''
-
-        // Call function to update the task List display
-        displayTasks()
+document.getElementById('addTaskBtn').addEventListener('click', addTask);
+document.getElementById('taskInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        addTask();
     }
-})
+});
 
-document.getElementById('addTaskBtn').addEventListener('keydown', function () {
-    // Storing text value from input box as a variable 'taskInput'
-    let taskInput = document.getElementById('taskInput').value
+function addTask() {
+    let taskInput = document.getElementById('taskInput').value;
 
-    // Checks if there is a Truthy or Falsy Statement
     if (taskInput) {
-        // Add the task to the tasks array
-        tasks.push(taskInput)
-
-        // Clear the input field after adding the task
-        document.getElementById('taskInput').value = ''
-
-        // Call function to update the task List display
-        displayTasks()
+        tasks.push(taskInput);
+        document.getElementById('taskInput').value = '';
+        displayTasks();
+taskNum ++
+plus()
     }
-}) 
+}
+
+
 
 
 // Function to display the tasks[] array in the UL
@@ -73,6 +60,7 @@ function removeTask(index) {
 
     // Call the function to update the task list display
     displayTasks()
+    minus()
 
 }
 
@@ -82,4 +70,22 @@ document.getElementById('clearTaskBtn').addEventListener('click', function() {
     tasks = []
     //Display cleared list
     displayTasks()
+    minus()
+
 })
+
+
+function plus() {
+    let taskNumElement = document.getElementById('taskNum');
+    let taskNum = parseInt(taskNumElement.textContent) || 0; // Get current number, default to 0 if empty
+    taskNum++; // Increment the number
+    taskNumElement.textContent = taskNum; // Update the element's text
+}
+
+
+function minus() {
+    let taskNumElement = document.getElementById('taskNum');
+    let taskNum = parseInt(taskNumElement.textContent) || 0; // Get current number, default to 0 if empty
+    taskNum--; // Increment the number
+    taskNumElement.textContent = taskNum; // Update the element's text
+}
